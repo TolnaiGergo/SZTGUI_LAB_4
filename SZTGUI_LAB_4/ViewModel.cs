@@ -14,7 +14,9 @@ namespace SZTGUI_LAB_4
         private BindingList<Food> orderList;
         private List<Foods> filters;
         private bool isFilterOn;
-        public Foods selectedFilter;
+        private Foods selectedFilter;
+        private Food selectedMenu;
+        private Food selectedOrder;
         public List<Food> Menu 
         { 
             get 
@@ -38,7 +40,10 @@ namespace SZTGUI_LAB_4
             get { return isFilterOn; }
             set { isFilterOn = value; }
         }
-        public BindingList<Food> a;
+        public BindingList<Food> OredrList
+        {
+            get { return orderList;}
+        }
         public ViewModel()
         {
             menu = new List<Food>()
@@ -51,11 +56,28 @@ namespace SZTGUI_LAB_4
                 new Food("Marlenka", Foods.Dessert, 990),
                 new Food("Burger", Foods.Appetizer, 890)
             };
+            filters = new List<Foods>()
+            {
+                Foods.Appetizer,
+                Foods.Drink,
+                Foods.MainCourse,
+                Foods.Dessert
+            };
 
         }
         public List<Food> GetFilteredMenu(Foods filter) 
         {
             return menu.FindAll(x => x.Type == filter);
+        }
+        public Foods SelectedFilter
+        {
+            get { return selectedFilter; }
+            set { selectedFilter = value; }
+        }
+        public Food SelectedMenu
+        {
+            get { return selectedMenu; }
+            set { selectedMenu = value; }
         }
 
     }
