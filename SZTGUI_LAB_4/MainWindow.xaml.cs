@@ -37,7 +37,7 @@ namespace SZTGUI_LAB_4
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if((DataContext as ViewModel).SelectedMenu != null)
+            if ((DataContext as ViewModel).SelectedMenu != null)
                 (DataContext as ViewModel).OrderList.Add((DataContext as ViewModel).SelectedMenu);
             if ((DataContext as ViewModel).OrderList != null)
             {
@@ -45,7 +45,7 @@ namespace SZTGUI_LAB_4
                 foreach (var item in (DataContext as ViewModel).OrderList)
                     sum += item.Price;
                 if ((DataContext as ViewModel).OrderList.Count() != 0)
-                    sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
+                    sumLabel.Content = $"{sum} Ft";
                 else
                     sumLabel.Content = "0 Ft";
             }
@@ -63,7 +63,7 @@ namespace SZTGUI_LAB_4
                 foreach (var item in (DataContext as ViewModel).OrderList)
                     sum += item.Price;
                 if ((DataContext as ViewModel).OrderList.Count() != 0)
-                    sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
+                    sumLabel.Content = $"{sum} Ft";
                 else
                     sumLabel.Content = "0 Ft";
             }

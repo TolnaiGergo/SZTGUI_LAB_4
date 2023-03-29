@@ -20,16 +20,7 @@ namespace SZTGUI_LAB_4
         private Foods selectedFilter;
         private Food selectedMenu;
         private Food selectedOrder;
-        public int Summa
-        {
-            get
-            {
-                int sum = 0;
-                foreach (var item in orderList)
-                    sum += item.Price;
-                return sum;
-            }
-        }
+        
         public BindingList<Food> Menu 
         {
             get
