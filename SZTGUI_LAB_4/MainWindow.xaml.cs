@@ -39,6 +39,18 @@ namespace SZTGUI_LAB_4
         {
             if ((DataContext as ViewModel).SelectedMenu != null)
                 (DataContext as ViewModel).OrderList.Add((DataContext as ViewModel).SelectedMenu);
+            OrderChanged();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if ((DataContext as ViewModel).SelectedOrder != null)
+                (DataContext as ViewModel).OrderList.Remove((DataContext as ViewModel).SelectedOrder);
+            OrderChanged();
+        }
+
+        private void OrderChanged()
+        {
             if ((DataContext as ViewModel).OrderList != null)
             {
                 int sum = 0;
@@ -52,23 +64,10 @@ namespace SZTGUI_LAB_4
             else
                 sumLabel.Content = $"??? Ft";
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void selectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((DataContext as ViewModel).SelectedOrder != null)
-                (DataContext as ViewModel).OrderList.Remove((DataContext as ViewModel).SelectedOrder);
-            if ((DataContext as ViewModel).OrderList != null)
-            {
-                int sum = 0;
-                foreach (var item in (DataContext as ViewModel).OrderList)
-                    sum += item.Price;
-                if ((DataContext as ViewModel).OrderList.Count() != 0)
-                    sumLabel.Content = $"{sum} Ft";
-                else
-                    sumLabel.Content = "0 Ft";
-            }
-            else
-                sumLabel.Content = $"??? Ft";
+            addButton.IsEnabled = (DataContext as ViewModel).SelectedMenu != null;
+            removeButton.IsEnabled = (DataContext as ViewModel).SelectedOrder != null;
         }
     }
 }
