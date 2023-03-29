@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:SZTGUI_LAB_4"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:FoodsEnumToColorConverter x:Key="foodEnum"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
@@ -24,14 +27,14 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <CheckBox Content="Filter" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked"/>
+                <CheckBox Content="Filter" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsFilterOn}"/>
                 <ComboBox  Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Filters}" SelectedItem="{Binding SelectedFilter}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Grid>
             <StackPanel Grid.Row="1">
                 <ListBox x:Name="menuBox" Grid.Column="2" ItemsSource="{Binding Menu}" SelectedItem="{Binding SelectedMenu}" MouseDoubleClick="menuBox_MouseDoubleClick">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Background="{Binding Type, Converter={StaticResource foodEnum}}">
                                 <Label Content="{Binding Name}"/>
                                 <Label Content="{Binding Type}"/>
                                 <Label Content="{Binding Price}"/>
@@ -43,11 +46,11 @@
         </Grid>
         <StackPanel Grid.Column="1">
             <Label HorizontalContentAlignment="Center" Content="Össz:"/>
-            <Label HorizontalContentAlignment="Center" Content="???"/>
-            <Button Content="Add"/>
-            <Button Content="Remove"/>
+            <Label x:Name="sumLabel" HorizontalContentAlignment="Center" Content="???"/>
+            <Button Content="Add" Click="Button_Click"/>
+            <Button Content="Remove" Click="Button_Click_1"/>
         </StackPanel>
-        <ListBox Grid.Column="2" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}">
+        <ListBox Grid.Column="2" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}" SourceUpdated="ListBox_SourceUpdated">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
