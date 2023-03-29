@@ -64,6 +64,7 @@ namespace SZTGUI_LAB_4
                 Foods.MainCourse,
                 Foods.Dessert
             };
+            orderList = new BindingList<Food>();
 
         }
         public BindingList<Food> GetFilteredMenu(Foods filter) 
