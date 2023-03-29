@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -40,7 +41,7 @@ namespace SZTGUI_LAB_4
             get { return isFilterOn; }
             set { isFilterOn = value; }
         }
-        public BindingList<Food> OredrList
+        public BindingList<Food> OrderList
         {
             get { return orderList;}
         }
@@ -85,8 +86,9 @@ namespace SZTGUI_LAB_4
             set { selectedOrder = value; }
         }
     }
-    public class Food
+    public class Food : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         private string name;
         private Foods type;
         private int price;
@@ -101,21 +103,26 @@ namespace SZTGUI_LAB_4
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value; OnPropertyChanged(); }
         }
         public Foods Type
         {
             get { return type; }
-            set { type = value; }
+            set { type = value; OnPropertyChanged(); }
         }
         public int Price
         {
             get { return price; }
-            set { price = value; }
+            set { price = value; OnPropertyChanged(); }
+        }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-
+        
     }
     public enum Foods
     {
