@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,9 @@ namespace SZTGUI_LAB_4
     public class ViewModel
     {
         private List<Food> menu;
+        private BindingList<Food> orderList;
         private List<Foods> filters;
-        public bool isFilterOn;
+        private bool isFilterOn;
         public Foods selectedFilter;
         public List<Food> Menu 
         { 
@@ -31,6 +33,12 @@ namespace SZTGUI_LAB_4
         {
             get { return filters;}
         }
+        public bool IsFilterOn
+        {
+            get { return isFilterOn; }
+            set { isFilterOn = value; }
+        }
+        public BindingList<Food> a;
         public ViewModel()
         {
             menu = new List<Food>()
