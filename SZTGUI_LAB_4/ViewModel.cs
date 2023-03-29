@@ -11,18 +11,18 @@ namespace SZTGUI_LAB_4
 {
     public class ViewModel
     {
-        private List<Food> menu;
+        private BindingList<Food> menu;
         private BindingList<Food> orderList;
         private List<Foods> filters;
         private bool isFilterOn;
         private Foods selectedFilter;
         private Food selectedMenu;
         private Food selectedOrder;
-        public List<Food> Menu 
-        { 
-            get 
+        public BindingList<Food> Menu 
+        {
+            get
             {
-                if(isFilterOn) 
+                if (isFilterOn)
                 {
                     return GetFilteredMenu(selectedFilter);
                 }
@@ -30,7 +30,7 @@ namespace SZTGUI_LAB_4
                 {
                     return menu;
                 }
-            } 
+            }
         }
         public List<Foods> Filters
         {
@@ -47,7 +47,7 @@ namespace SZTGUI_LAB_4
         }
         public ViewModel()
         {
-            menu = new List<Food>()
+            menu = new BindingList<Food>()
             {
                 new Food("Sör", Foods.Drink, 890),
                 new Food("Kóla", Foods.Drink, 690),
@@ -66,9 +66,9 @@ namespace SZTGUI_LAB_4
             };
 
         }
-        public List<Food> GetFilteredMenu(Foods filter) 
+        public BindingList<Food> GetFilteredMenu(Foods filter) 
         {
-            return menu.FindAll(x => x.Type == filter);
+            return new BindingList<Food>(menu.ToList().FindAll(x => x.Type == filter));
         }
         public Foods SelectedFilter
         {
