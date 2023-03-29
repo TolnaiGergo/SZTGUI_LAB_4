@@ -6,12 +6,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SZTGUI_LAB_4
 {
     public class ViewModel
     {
         private BindingList<Food> menu;
+        private BindingList<Food> filteredList;
         private BindingList<Food> orderList;
         private List<Foods> filters;
         private bool isFilterOn;
@@ -24,11 +26,17 @@ namespace SZTGUI_LAB_4
             {
                 if (isFilterOn)
                 {
-                    return GetFilteredMenu(selectedFilter);
+                    FilterMenu(selectedFilter);
+                    return filteredList;
                 }
                 else
                 {
-                    return menu;
+                    filteredList.Clear();
+                    foreach (var item in menu)
+                    {
+                        filteredList.Add(item);
+                    };
+                    return filteredList;
                 }
             }
         }
@@ -57,6 +65,7 @@ namespace SZTGUI_LAB_4
                 new Food("Marlenka", Foods.Dessert, 990),
                 new Food("Burger", Foods.Appetizer, 890)
             };
+            filteredList = new BindingList<Food>();
             filters = new List<Foods>()
             {
                 Foods.Appetizer,
@@ -67,9 +76,13 @@ namespace SZTGUI_LAB_4
             orderList = new BindingList<Food>();
 
         }
-        public BindingList<Food> GetFilteredMenu(Foods filter) 
-        {
-            return new BindingList<Food>(menu.ToList().FindAll(x => x.Type == filter));
+        public void FilterMenu(Foods filter)
+        { 
+            filteredList.Clear();
+            foreach(var item in menu.ToList().FindAll(x => x.Type == filter))
+            {
+                filteredList.Add(item);
+            }
         }
         public Foods SelectedFilter
         {
