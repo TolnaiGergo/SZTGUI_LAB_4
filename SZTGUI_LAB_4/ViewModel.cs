@@ -20,31 +20,32 @@ namespace SZTGUI_LAB_4
         private Foods selectedFilter;
         private Food selectedMenu;
         private Food selectedOrder;
-        
-        public BindingList<Food> Menu 
-        {
-            get
-            {
-                return filteredList;
-            }
-        }
-        public List<Foods> Filters
-        {
-            get { return filters;}
-        }
+        public BindingList<Food> Menu { get => filteredList; }
+        public List<Foods> Filters { get => filters; }
         public bool IsFilterOn
         {
-            get { return isFilterOn; }
-            set { isFilterOn = value; }
+            get => isFilterOn;
+            set
+            {
+                isFilterOn = value;
+                if (isFilterOn)
+                {
+                    filteredList.Clear();
+                    foreach (var item in menu.ToList().FindAll(x => x.Type == selectedFilter))
+                        filteredList.Add(item);
+                }
+                else
+                {
+                    filteredList.Clear();
+                    foreach (var item in menu)
+                        filteredList.Add(item);
+                }
+            }
         }
-        public BindingList<Food> OrderList
-        {
-            get { return orderList;}
-        }
+        public BindingList<Food> OrderList { get => orderList; }
         public ViewModel()
         {
-            menu = new BindingList<Food>()
-            {
+            menu = new BindingList<Food>(){
                 new Food("Sör", Foods.Drink, 890),
                 new Food("Kóla", Foods.Drink, 690),
                 new Food("Víz", Foods.Drink, 450),
@@ -55,46 +56,55 @@ namespace SZTGUI_LAB_4
             };
             filteredList = new BindingList<Food>();
             LoadMenu();
-            filters = new List<Foods>()
-            {
+            filters = new List<Foods>(){
                 Foods.Appetizer,
                 Foods.Drink,
                 Foods.MainCourse,
                 Foods.Dessert
             };
             orderList = new BindingList<Food>();
-
         }
         public void FilterMenu(Foods filter)
-        { 
+        {
             filteredList.Clear();
-            foreach(var item in menu.ToList().FindAll(x => x.Type == filter))
-            {
+            foreach (var item in menu.ToList().FindAll(x => x.Type == filter))
                 filteredList.Add(item);
-            }
         }
         public void LoadMenu()
         {
             filteredList.Clear();
             foreach (var item in menu)
-            {
                 filteredList.Add(item);
-            }
         }
         public Foods SelectedFilter
         {
-            get { return selectedFilter; }
-            set { selectedFilter = value; }
+            get => selectedFilter;
+            set
+            {
+                selectedFilter = value;
+                if (isFilterOn)
+                {
+                    filteredList.Clear();
+                    foreach (var item in menu.ToList().FindAll(x => x.Type == selectedFilter))
+                        filteredList.Add(item);
+                }
+                else
+                {
+                    filteredList.Clear();
+                    foreach (var item in menu)
+                        filteredList.Add(item);
+                }
+            }
         }
         public Food SelectedMenu
         {
-            get { return selectedMenu; }
-            set { selectedMenu = value; }
+            get => selectedMenu;
+            set => selectedMenu = value;
         }
         public Food SelectedOrder
         {
-            get { return selectedOrder; }
-            set { selectedOrder = value; }
+            get => selectedOrder;
+            set => selectedOrder = value;
         }
     }
     public class Food : INotifyPropertyChanged
@@ -113,17 +123,17 @@ namespace SZTGUI_LAB_4
 
         public string Name
         {
-            get { return name; }
+            get => name;
             set { name = value; OnPropertyChanged(); }
         }
         public Foods Type
         {
-            get { return type; }
+            get => type;
             set { type = value; OnPropertyChanged(); }
         }
         public int Price
         {
-            get { return price; }
+            get => price;
             set { price = value; OnPropertyChanged(); }
         }
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -133,10 +143,7 @@ namespace SZTGUI_LAB_4
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
     }
-    public enum Foods
-    {
-        Appetizer, Drink, MainCourse, Dessert
-    }
+    public enum Foods { Appetizer, Drink, MainCourse, Dessert }
 }
