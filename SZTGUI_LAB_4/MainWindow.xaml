@@ -24,10 +24,21 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <CheckBox Content="Filter" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ComboBox  Grid.Row="0" Grid.Column="1"></ComboBox>
+                <CheckBox Content="Filter" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked"/>
+                <ComboBox  Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Filters}" SelectedItem="{Binding SelectedFilter}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Grid>
             <StackPanel Grid.Row="1">
+                <ListBox x:Name="menuBox" Grid.Column="2" ItemsSource="{Binding Menu}" SelectedItem="{Binding SelectedMenu}" MouseDoubleClick="menuBox_MouseDoubleClick">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Name}"/>
+                                <Label Content="{Binding Type}"/>
+                                <Label Content="{Binding Price}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Column="1">
@@ -36,13 +47,13 @@
             <Button Content="Add"/>
             <Button Content="Remove"/>
         </StackPanel>
-        <ListBox Grid.Column="2">
+        <ListBox Grid.Column="2" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="KajaName"/>
-                        <Label Content="KajaType"/>
-                        <Label Content="KajaPrice"/>
+                        <Label Content="{Binding Name}"/>
+                        <Label Content="{Binding Type}"/>
+                        <Label Content="{Binding Price}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
