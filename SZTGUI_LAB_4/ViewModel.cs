@@ -79,7 +79,11 @@ namespace SZTGUI_LAB_4
             get { return selectedMenu; }
             set { selectedMenu = value; }
         }
-
+        public Food SelectedOrder
+        {
+            get { return selectedOrder; }
+            set { selectedOrder = value; }
+        }
     }
     public class Food
     {
