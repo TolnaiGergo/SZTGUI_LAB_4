@@ -46,11 +46,11 @@
         </Grid>
         <StackPanel Grid.Column="1">
             <Label HorizontalContentAlignment="Center" Content="Össz:"/>
-            <Label x:Name="sumLabel" HorizontalContentAlignment="Center" Content="???"/>
+            <Label x:Name="sumLabel" HorizontalContentAlignment="Center"/>
             <Button Content="Add" Click="Button_Click"/>
             <Button Content="Remove" Click="Button_Click_1"/>
         </StackPanel>
-        <ListBox Grid.Column="2" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}" SourceUpdated="ListBox_SourceUpdated">
+        <ListBox Grid.Column="2" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

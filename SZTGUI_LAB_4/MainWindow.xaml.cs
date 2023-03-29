@@ -39,40 +39,36 @@ namespace SZTGUI_LAB_4
         {
             if((DataContext as ViewModel).SelectedMenu != null)
                 (DataContext as ViewModel).OrderList.Add((DataContext as ViewModel).SelectedMenu);
-            if ((DataContext as ViewModel).SelectedOrder != null)
+            if ((DataContext as ViewModel).OrderList != null)
             {
                 int sum = 0;
                 foreach (var item in (DataContext as ViewModel).OrderList)
                     sum += item.Price;
-                sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
+                if ((DataContext as ViewModel).OrderList.Count() != 0)
+                    sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
+                else
+                    sumLabel.Content = "0 Ft";
             }
-            sumLabel.Content = $"??? Ft";
+            else
+                sumLabel.Content = $"??? Ft";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if ((DataContext as ViewModel).SelectedOrder != null)
                 (DataContext as ViewModel).OrderList.Remove((DataContext as ViewModel).SelectedOrder);
-            if ((DataContext as ViewModel).SelectedOrder != null)
+            if ((DataContext as ViewModel).OrderList != null)
             {
                 int sum = 0;
                 foreach (var item in (DataContext as ViewModel).OrderList)
                     sum += item.Price;
-                sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
+                if ((DataContext as ViewModel).OrderList.Count() != 0)
+                    sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
+                else
+                    sumLabel.Content = "0 Ft";
             }
-            sumLabel.Content = $"??? Ft";
-        }
-
-        private void ListBox_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            if ((DataContext as ViewModel).SelectedOrder != null)
-            {
-                int sum = 0;
-                foreach (var item in (DataContext as ViewModel).OrderList)
-                    sum += item.Price;
-                sumLabel.Content = $"{(double)sum / (DataContext as ViewModel).OrderList.Count()} Ft";
-            }
-            sumLabel.Content = $"??? Ft";
+            else
+                sumLabel.Content = $"??? Ft";
         }
     }
 }
