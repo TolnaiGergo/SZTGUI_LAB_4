@@ -24,20 +24,7 @@ namespace SZTGUI_LAB_4
         {
             get
             {
-                if (isFilterOn)
-                {
-                    FilterMenu(selectedFilter);
-                    return filteredList;
-                }
-                else
-                {
-                    filteredList.Clear();
-                    foreach (var item in menu)
-                    {
-                        filteredList.Add(item);
-                    };
-                    return filteredList;
-                }
+                return filteredList;
             }
         }
         public List<Foods> Filters
@@ -66,6 +53,7 @@ namespace SZTGUI_LAB_4
                 new Food("Burger", Foods.Appetizer, 890)
             };
             filteredList = new BindingList<Food>();
+            LoadMenu();
             filters = new List<Foods>()
             {
                 Foods.Appetizer,
@@ -80,6 +68,14 @@ namespace SZTGUI_LAB_4
         { 
             filteredList.Clear();
             foreach(var item in menu.ToList().FindAll(x => x.Type == filter))
+            {
+                filteredList.Add(item);
+            }
+        }
+        public void LoadMenu()
+        {
+            filteredList.Clear();
+            foreach (var item in menu)
             {
                 filteredList.Add(item);
             }
