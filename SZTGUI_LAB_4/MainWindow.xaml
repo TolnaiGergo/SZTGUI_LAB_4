@@ -7,6 +7,45 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Content="Filter" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox  Grid.Row="0" Grid.Column="1"></ComboBox>
+            </Grid>
+            <StackPanel Grid.Row="1">
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Column="1">
+            <Label HorizontalContentAlignment="Center" Content="Össz:"/>
+            <Label HorizontalContentAlignment="Center" Content="???"/>
+            <Button Content="Add"/>
+            <Button Content="Remove"/>
+        </StackPanel>
+        <ListBox Grid.Column="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="KajaName"/>
+                        <Label Content="KajaType"/>
+                        <Label Content="KajaPrice"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
